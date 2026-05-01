@@ -1,0 +1,13 @@
+{
+  "itemGroup.multiplicativeenchantmentdamage": "Example Mod Tab",
+  "block.multiplicativeenchantmentdamage.example_block": "Example Block",
+  "item.multiplicativeenchantmentdamage.example_item": "Example Item",
+
+  "multiplicativeenchantmentdamage.configuration.title": "Multiplicative Enchantment Damage Configs",
+  "multiplicativeenchantmentdamage.configuration.section.multiplicativeenchantmentdamage.common.toml": "Multiplicative Enchantment Damage Configs",
+  "multiplicativeenchantmentdamage.configuration.section.multiplicativeenchantmentdamage.common.toml.title": "Multiplicative Enchantment Damage Configs",
+  "multiplicativeenchantmentdamage.configuration.items": "Item List",
+  "multiplicativeenchantmentdamage.configuration.logDirtBlock": "Log Dirt Block",
+  "multiplicativeenchantmentdamage.configuration.magicNumberIntroduction": "Magic Number Text",
+  "multiplicativeenchantmentdamage.configuration.magicNumber": "Magic Number"
+}

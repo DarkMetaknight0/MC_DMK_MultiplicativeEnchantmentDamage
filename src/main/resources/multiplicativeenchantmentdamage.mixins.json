@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.darkmetaknight.multiplicative_enchantment_damage.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EnchantmentsRegisterMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

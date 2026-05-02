@@ -62,12 +62,12 @@ public class MultiplicativeEnchantmentDamage {
                     livingIncomingDamageEvent,
                     Enchantments.SHARPNESS);
 
-            int baseDamage = Optional.ofNullable(livingIncomingDamageEvent.getSource()
-                            .getWeaponItem())
-                    .map(ItemStack::getDamageValue)
-                    .orElse(0);
-
             if (enchantLevel > 0) {
+                int baseDamage = Optional.ofNullable(livingIncomingDamageEvent.getSource()
+                                .getWeaponItem())
+                        .map(ItemStack::getDamageValue)
+                        .orElse(0);
+
                 float newDamage = livingIncomingDamageEvent.getContainer()
                         .getNewDamage();
                 if (SHARPNESS_OVERWRITE.isTrue()) {

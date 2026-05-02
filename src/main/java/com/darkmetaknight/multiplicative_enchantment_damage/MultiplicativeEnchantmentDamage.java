@@ -1,7 +1,9 @@
 package com.darkmetaknight.multiplicative_enchantment_damage;
 
 import com.darkmetaknight.multiplicative_enchantment_damage.common.Config;
+import com.darkmetaknight.multiplicative_enchantment_damage.enchantments.MultiplicativeEnchantmentUtils;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -9,6 +11,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
@@ -45,6 +48,14 @@ public class MultiplicativeEnchantmentDamage {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+
+    }
+
+    @SubscribeEvent
+    public static void multiplicativeSharpness(LivingIncomingDamageEvent livingIncomingDamageEvent) {
+        int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
+                livingIncomingDamageEvent,
+                Enchantments.SHARPNESS);
 
     }
 

@@ -3,6 +3,7 @@ package com.darkmetaknight.multiplicative_enchantment_damage;
 import com.darkmetaknight.multiplicative_enchantment_damage.common.Config;
 import com.darkmetaknight.multiplicative_enchantment_damage.enchantments.MultiplicativeEnchantmentUtils;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,6 +16,9 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
+import java.util.Optional;
+
+import static com.darkmetaknight.multiplicative_enchantment_damage.common.Config.*;
 import static com.darkmetaknight.multiplicative_enchantment_damage.common.Const.LOG_FORMAT;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -53,10 +57,34 @@ public class MultiplicativeEnchantmentDamage {
 
     @SubscribeEvent
     public static void multiplicativeSharpness(LivingIncomingDamageEvent livingIncomingDamageEvent) {
-        int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
-                livingIncomingDamageEvent,
-                Enchantments.SHARPNESS);
+        if (!livingIncomingDamageEvent.isCanceled()) {
+            int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
+                    livingIncomingDamageEvent,
+                    Enchantments.SHARPNESS);
 
+            int baseDamage = Optional.ofNullable(livingIncomingDamageEvent.getSource()
+                            .getWeaponItem())
+                    .map(ItemStack::getDamageValue)
+                    .orElse(0);
+
+            if (enchantLevel > 0) {
+                float newDamage = livingIncomingDamageEvent.getContainer()
+                        .getNewDamage();
+                if (SHARPNESS_OVERWRITE.isTrue()) {
+                    newDamage = newDamage - (0.5f + 0.5f * enchantLevel);
+                }
+                if (SHARPNESS_ENABLED.isTrue()) {
+                    if (enchantLevel > 1) {
+                        enchantLevel--; // Effective additional multiplier
+                    }
+                    newDamage = newDamage + (baseDamage * (SHARPNESS_MULTIPLY_FIRST_LEVEL.get()
+                            + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.get() * enchantLevel));
+                }
+                livingIncomingDamageEvent
+                        .getContainer()
+                        .setNewDamage(Math.max(0.0f, newDamage));
+            }
+        }
     }
 
 }

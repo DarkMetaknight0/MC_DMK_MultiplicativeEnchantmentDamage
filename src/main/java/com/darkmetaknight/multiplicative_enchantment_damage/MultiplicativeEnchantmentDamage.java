@@ -59,33 +59,29 @@ public class MultiplicativeEnchantmentDamage {
                     livingIncomingDamageEvent,
                     Enchantments.SHARPNESS);
             System.out.println("Enchant level = " + enchantLevel);
-
             if (enchantLevel > 0) {
-                // TODO: Find weapon base damage to make additive. This returns 0 for some reason.
-//                int baseDamage = Optional.ofNullable(livingIncomingDamageEvent.getSource()
-//                                .getWeaponItem())
-//                        .map(ItemStack::getDamageValue)
-//                        .orElse(0);
-//                System.out.println("baseDamage = " + baseDamage);
-
+                float baseDamage = livingIncomingDamageEvent.getContainer()
+                        .getOriginalDamage();
                 float newDamage = livingIncomingDamageEvent.getContainer()
                         .getNewDamage();
+
                 System.out.println("newDamage before addition = " + newDamage);
                 if (SHARPNESS_OVERWRITE.isTrue()) {
-                    newDamage = newDamage - (0.5f + 0.5f * enchantLevel);
-                    System.out.println("Overwrite sharpness = " + newDamage);
+                    float vanillaSharpnessSubtract = 0.5f + 0.5f * enchantLevel;
+                    baseDamage = baseDamage - vanillaSharpnessSubtract; // baseDamage has Sharpness added too
+                    newDamage = newDamage - vanillaSharpnessSubtract;
+                    System.out.println("Overwrite sharpness = " + baseDamage);
                 }
                 if (SHARPNESS_ENABLED.isTrue()) {
                     if (enchantLevel > 1) {
                         enchantLevel--; // Effective additional multiplier
                     }
-                    System.out.println("Total multiplier applied = "
+                    System.out.println("Total multiplier bonus applied = "
                             + (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
                             + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.getAsDouble()
-                            * enchantLevel));
+                            * enchantLevel) * baseDamage);
 
-                    // TODO: Add down here instead of multiply. Also make configs baseMultiplier 0.X instead of 1.X
-                    newDamage = (float) (newDamage * (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
+                    newDamage = (float) (newDamage + baseDamage * (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
                             + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.getAsDouble()
                             * enchantLevel));
                     System.out.println("Sharpness multiplier applied = " + newDamage);

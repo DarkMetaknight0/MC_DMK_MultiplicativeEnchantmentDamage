@@ -56,7 +56,7 @@ public class Config {
     public static final ModConfigSpec.BooleanValue SHARPNESS_OVERWRITE
             = buildOverwriteConfig(SHARPNESS);
     public static final ModConfigSpec.DoubleValue SHARPNESS_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(SHARPNESS, 1.168);
+            = buildFirstLevelConfig(SHARPNESS, 0.168);
     public static final ModConfigSpec.DoubleValue SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS
             = buildAdditionalLevelConfig(SHARPNESS, 0.083);
 
@@ -67,7 +67,7 @@ public class Config {
     public static final ModConfigSpec.DoubleValue BANE_OF_ARTHROPODS_MULTIPLY_FIRST_LEVEL
             = buildFirstLevelConfig(BANE_OF_ARTHROPODS, 0.53);
     public static final ModConfigSpec.DoubleValue BANE_OF_ARTHROPODS_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(BANE_OF_ARTHROPODS, 0.053);
+            = buildAdditionalLevelConfig(BANE_OF_ARTHROPODS, 0.53);
 
     public static final ModConfigSpec.BooleanValue SMITE_ENABLED
             = buildEnabledConfig(SMITE);
@@ -76,7 +76,7 @@ public class Config {
     public static final ModConfigSpec.DoubleValue SMITE_MULTIPLY_FIRST_LEVEL
             = buildFirstLevelConfig(SMITE, 0.53);
     public static final ModConfigSpec.DoubleValue SMITE_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(SMITE, 0.053);
+            = buildAdditionalLevelConfig(SMITE, 0.53);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 }

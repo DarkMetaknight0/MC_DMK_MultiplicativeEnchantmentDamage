@@ -56,7 +56,7 @@ public class MultiplicativeEnchantmentDamage {
     }
 
     @SubscribeEvent
-    public static void multiplicativeSharpness(LivingIncomingDamageEvent livingIncomingDamageEvent) {
+    public void multiplicativeSharpness(LivingIncomingDamageEvent livingIncomingDamageEvent) {
         if (!livingIncomingDamageEvent.isCanceled()) {
             int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
                     livingIncomingDamageEvent,

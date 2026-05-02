@@ -3,7 +3,6 @@ package com.darkmetaknight.multiplicative_enchantment_damage;
 import com.darkmetaknight.multiplicative_enchantment_damage.common.Config;
 import com.darkmetaknight.multiplicative_enchantment_damage.enchantments.MultiplicativeEnchantmentUtils;
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,8 +14,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
-
-import java.util.Optional;
 
 import static com.darkmetaknight.multiplicative_enchantment_damage.common.Config.*;
 import static com.darkmetaknight.multiplicative_enchantment_damage.common.Const.LOG_FORMAT;
@@ -61,24 +58,37 @@ public class MultiplicativeEnchantmentDamage {
             int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
                     livingIncomingDamageEvent,
                     Enchantments.SHARPNESS);
+            System.out.println("Enchant level = " + enchantLevel);
 
             if (enchantLevel > 0) {
-                int baseDamage = Optional.ofNullable(livingIncomingDamageEvent.getSource()
-                                .getWeaponItem())
-                        .map(ItemStack::getDamageValue)
-                        .orElse(0);
+                // TODO: Find weapon base damage to make additive. This returns 0 for some reason.
+//                int baseDamage = Optional.ofNullable(livingIncomingDamageEvent.getSource()
+//                                .getWeaponItem())
+//                        .map(ItemStack::getDamageValue)
+//                        .orElse(0);
+//                System.out.println("baseDamage = " + baseDamage);
 
                 float newDamage = livingIncomingDamageEvent.getContainer()
                         .getNewDamage();
+                System.out.println("newDamage before addition = " + newDamage);
                 if (SHARPNESS_OVERWRITE.isTrue()) {
                     newDamage = newDamage - (0.5f + 0.5f * enchantLevel);
+                    System.out.println("Overwrite sharpness = " + newDamage);
                 }
                 if (SHARPNESS_ENABLED.isTrue()) {
                     if (enchantLevel > 1) {
                         enchantLevel--; // Effective additional multiplier
                     }
-                    newDamage = newDamage + (baseDamage * (SHARPNESS_MULTIPLY_FIRST_LEVEL.get()
-                            + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.get() * enchantLevel));
+                    System.out.println("Total multiplier applied = "
+                            + (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
+                            + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.getAsDouble()
+                            * enchantLevel));
+
+                    // TODO: Add down here instead of multiply. Also make configs baseMultiplier 0.X instead of 1.X
+                    newDamage = (float) (newDamage * (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
+                            + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.getAsDouble()
+                            * enchantLevel));
+                    System.out.println("Sharpness multiplier applied = " + newDamage);
                 }
                 livingIncomingDamageEvent
                         .getContainer()

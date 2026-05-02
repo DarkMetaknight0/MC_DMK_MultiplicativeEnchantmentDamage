@@ -28,55 +28,55 @@ public class Config {
     /**
      * Util to generate first level scaling config for given enchantment
      */
-    private static ModConfigSpec.ConfigValue<Float> buildFirstLevelConfig(
+    private static ModConfigSpec.DoubleValue buildFirstLevelConfig(
             String enchantmentName,
-            float defaultVal
+            double defaultVal
     ) {
         return BUILDER
                 .comment(String.format(CONFIG_DESC_MULTIPLY_FIRST_LEVEL, enchantmentName, defaultVal))
                 .defineInRange(String.format(CONFIG_KEY_LEVEL_ONE_SCALING, enchantmentName),
-                        defaultVal, 0.01f, 99999.99f, Float.class);
+                        defaultVal, 0.01, 99999.99);
     }
 
     /**
      * Util to generate additional level scaling per level for given enchantment
      */
-    private static ModConfigSpec.ConfigValue<Float> buildAdditionalLevelConfig(
+    private static ModConfigSpec.DoubleValue buildAdditionalLevelConfig(
             String enchantmentName,
-            float defaultVal
+            double defaultVal
     ) {
         return BUILDER
                 .comment(String.format(CONFIG_DESC_ADDITIONAL_SCALING, enchantmentName, defaultVal))
                 .defineInRange(String.format(CONFIG_KEY_ADDITIONAL_SCALING, enchantmentName),
-                        defaultVal, 0.01f, 99999.99f, Float.class);
+                        defaultVal, 0.01, 99999.99);
     }
 
     public static final ModConfigSpec.BooleanValue SHARPNESS_ENABLED
             = buildEnabledConfig(SHARPNESS);
     public static final ModConfigSpec.BooleanValue SHARPNESS_OVERWRITE
             = buildOverwriteConfig(SHARPNESS);
-    public static final ModConfigSpec.ConfigValue<Float> SHARPNESS_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(SHARPNESS, 1.168f);
-    public static final ModConfigSpec.ConfigValue<Float> SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(SHARPNESS, 0.083f);
+    public static final ModConfigSpec.DoubleValue SHARPNESS_MULTIPLY_FIRST_LEVEL
+            = buildFirstLevelConfig(SHARPNESS, 1.168);
+    public static final ModConfigSpec.DoubleValue SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS
+            = buildAdditionalLevelConfig(SHARPNESS, 0.083);
 
     public static final ModConfigSpec.BooleanValue BANE_OF_ARTHROPODS_ENABLED
             = buildEnabledConfig(BANE_OF_ARTHROPODS);
     public static final ModConfigSpec.BooleanValue BANE_OF_ARTHROPODS_OVERWRITE
             = buildOverwriteConfig(BANE_OF_ARTHROPODS);
-    public static final ModConfigSpec.ConfigValue<Float> BANE_OF_ARTHROPODS_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(BANE_OF_ARTHROPODS, 0.53f);
-    public static final ModConfigSpec.ConfigValue<Float> BANE_OF_ARTHROPODS_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(BANE_OF_ARTHROPODS, 0.053f);
+    public static final ModConfigSpec.DoubleValue BANE_OF_ARTHROPODS_MULTIPLY_FIRST_LEVEL
+            = buildFirstLevelConfig(BANE_OF_ARTHROPODS, 0.53);
+    public static final ModConfigSpec.DoubleValue BANE_OF_ARTHROPODS_MULTIPLY_ADDITIONAL_LEVELS
+            = buildAdditionalLevelConfig(BANE_OF_ARTHROPODS, 0.053);
 
     public static final ModConfigSpec.BooleanValue SMITE_ENABLED
             = buildEnabledConfig(SMITE);
     public static final ModConfigSpec.BooleanValue SMITE_OVERWRITE
             = buildOverwriteConfig(SMITE);
-    public static final ModConfigSpec.ConfigValue<Float> SMITE_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(SMITE, 0.53f);
-    public static final ModConfigSpec.ConfigValue<Float> SMITE_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(SMITE, 0.053f);
+    public static final ModConfigSpec.DoubleValue SMITE_MULTIPLY_FIRST_LEVEL
+            = buildFirstLevelConfig(SMITE, 0.53);
+    public static final ModConfigSpec.DoubleValue SMITE_MULTIPLY_ADDITIONAL_LEVELS
+            = buildAdditionalLevelConfig(SMITE, 0.053);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 }

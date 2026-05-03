@@ -141,14 +141,12 @@ public class MultiplicativeEnchantmentUtils {
         int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
                 livingIncomingDamageEvent,
                 checkForEnchantment);
-        System.out.println("Enchant level = " + enchantLevel);
         if (enchantLevel > 0) {
             float baseDamage = livingIncomingDamageEvent.getContainer()
                     .getOriginalDamage();
             float newDamage = livingIncomingDamageEvent.getContainer()
                     .getNewDamage();
 
-            System.out.println("newDamage before addition = " + newDamage);
             if (enchantLevel > 1) {
                 enchantLevel--; // Effective additional multiplier
             }
@@ -160,15 +158,9 @@ public class MultiplicativeEnchantmentUtils {
                 System.out.println("Overwrite smite = " + baseDamage);
             }
             if (configEnabled.isTrue()) {
-                System.out.println("Total multiplier bonus applied = "
-                        + (multiplyFirstLevelValue.getAsDouble()
-                        + multiplyAdditionalLevels.getAsDouble()
-                        * enchantLevel) * baseDamage);
-
                 newDamage = (float) (newDamage + baseDamage * (multiplyFirstLevelValue.getAsDouble()
                         + multiplyAdditionalLevels.getAsDouble()
                         * enchantLevel));
-                System.out.println("Smite multiplier applied = " + newDamage);
             }
             livingIncomingDamageEvent
                     .getContainer()

@@ -52,7 +52,9 @@ Mods often add "fast and weak" vs "slow and powerful" and even 2-handed weapons.
 
 This mod changes the following enchantment damage modifiers (Based on Vanilla scaling at 6 damage from a lighter weapon, Knives):
 1. Sharpness: From +1 damage at level 1, 0.5 per additional level -> +16.8% level 1, + 8.3% per additional. (x1.5 at level 5)
-2. Bane of Arthropods, Smite: +53% level 1, +53% per additional level. (x2.66 base damage at level 5 vs specific mobs)
+2. Bane of Arthropods, Smite, Impaling: +53% level 1, +53% per additional level. (x2.66 base damage at level 5 vs specific mobs)
+
+Fully configurable down to what each level adds to the multiplier!
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

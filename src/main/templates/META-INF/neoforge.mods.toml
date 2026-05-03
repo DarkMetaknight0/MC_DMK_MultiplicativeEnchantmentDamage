@@ -24,7 +24,7 @@ license="MIT"
 modId="multiplicativeenchantmentdamage" #mandatory
 
 # The version number of the mod
-version="0.5.0" #mandatory
+version="1.21.1-1.0.0" #mandatory
 
 # A display name for the mod
 displayName="Multiplicative Enchantment Damage" #mandatory

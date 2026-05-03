@@ -3,6 +3,7 @@ package com.darkmetaknight.multiplicative_enchantment_damage;
 import com.darkmetaknight.multiplicative_enchantment_damage.common.Config;
 import com.darkmetaknight.multiplicative_enchantment_damage.enchantments.MultiplicativeEnchantmentUtils;
 import com.mojang.logging.LogUtils;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,7 +17,6 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 import static com.darkmetaknight.multiplicative_enchantment_damage.common.Config.*;
-import static com.darkmetaknight.multiplicative_enchantment_damage.common.Const.LOG_FORMAT;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MultiplicativeEnchantmentDamage.MOD_ID)
@@ -42,8 +42,7 @@ public class MultiplicativeEnchantmentDamage {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info(LOG_FORMAT, "Init complete for multiplicativeEnchantmentDamage!", MOD_ID);
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -54,43 +53,61 @@ public class MultiplicativeEnchantmentDamage {
 
     @SubscribeEvent
     public void multiplicativeSharpness(LivingIncomingDamageEvent livingIncomingDamageEvent) {
-        if (!livingIncomingDamageEvent.isCanceled()) {
-            int enchantLevel = MultiplicativeEnchantmentUtils.getEnchantmentLevelGivenIncomingDamageEvent(
-                    livingIncomingDamageEvent,
-                    Enchantments.SHARPNESS);
-            System.out.println("Enchant level = " + enchantLevel);
-            if (enchantLevel > 0) {
-                float baseDamage = livingIncomingDamageEvent.getContainer()
-                        .getOriginalDamage();
-                float newDamage = livingIncomingDamageEvent.getContainer()
-                        .getNewDamage();
+        MultiplicativeEnchantmentUtils.applyMultiplicativeDamageAnyEntity(
+                livingIncomingDamageEvent,
+                Enchantments.SHARPNESS,
+                SHARPNESS_OVERWRITE,
+                SHARPNESS_ENABLED,
+                SHARPNESS_MULTIPLY_FIRST_LEVEL,
+                SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS,
+                1.0f,
+                0.5f
+        );
+    }
 
-                System.out.println("newDamage before addition = " + newDamage);
-                if (SHARPNESS_OVERWRITE.isTrue()) {
-                    float vanillaSharpnessSubtract = 0.5f + 0.5f * enchantLevel;
-                    baseDamage = baseDamage - vanillaSharpnessSubtract; // baseDamage has Sharpness added too
-                    newDamage = newDamage - vanillaSharpnessSubtract;
-                    System.out.println("Overwrite sharpness = " + baseDamage);
-                }
-                if (SHARPNESS_ENABLED.isTrue()) {
-                    if (enchantLevel > 1) {
-                        enchantLevel--; // Effective additional multiplier
-                    }
-                    System.out.println("Total multiplier bonus applied = "
-                            + (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
-                            + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.getAsDouble()
-                            * enchantLevel) * baseDamage);
+    @SubscribeEvent
+    public void multiplicativeBaneOfArthropods(LivingIncomingDamageEvent livingIncomingDamageEvent) {
+        MultiplicativeEnchantmentUtils.applyMultiplicativeDamageForEntityType(
+                livingIncomingDamageEvent,
+                Enchantments.BANE_OF_ARTHROPODS,
+                BANE_OF_ARTHROPODS_OVERWRITE,
+                BANE_OF_ARTHROPODS_ENABLED,
+                BANE_OF_ARTHROPODS_MULTIPLY_FIRST_LEVEL,
+                BANE_OF_ARTHROPODS_MULTIPLY_ADDITIONAL_LEVELS,
+                2.5f,
+                2.5f,
+                EntityTypeTags.SENSITIVE_TO_BANE_OF_ARTHROPODS
+        );
+    }
 
-                    newDamage = (float) (newDamage + baseDamage * (SHARPNESS_MULTIPLY_FIRST_LEVEL.getAsDouble()
-                            + SHARPNESS_MULTIPLY_ADDITIONAL_LEVELS.getAsDouble()
-                            * enchantLevel));
-                    System.out.println("Sharpness multiplier applied = " + newDamage);
-                }
-                livingIncomingDamageEvent
-                        .getContainer()
-                        .setNewDamage(Math.max(0.0f, newDamage));
-            }
-        }
+    @SubscribeEvent
+    public void multiplicativeSmite(LivingIncomingDamageEvent livingIncomingDamageEvent) {
+        MultiplicativeEnchantmentUtils.applyMultiplicativeDamageForEntityType(
+                livingIncomingDamageEvent,
+                Enchantments.SMITE,
+                SMITE_OVERWRITE,
+                SMITE_ENABLED,
+                SMITE_MULTIPLY_FIRST_LEVEL,
+                SMITE_MULTIPLY_ADDITIONAL_LEVELS,
+                2.5f,
+                2.5f,
+                EntityTypeTags.SENSITIVE_TO_SMITE
+        );
+    }
+
+    @SubscribeEvent
+    public void multiplicativeImpaling(LivingIncomingDamageEvent livingIncomingDamageEvent) {
+        MultiplicativeEnchantmentUtils.applyMultiplicativeDamageForEntityType(
+                livingIncomingDamageEvent,
+                Enchantments.IMPALING,
+                IMPALING_OVERWRITE,
+                IMPALING_ENABLED,
+                IMPALING_MULTIPLY_FIRST_LEVEL,
+                IMPALING_MULTIPLY_ADDITIONAL_LEVELS,
+                2.5f,
+                2.5f,
+                EntityTypeTags.SENSITIVE_TO_IMPALING
+        );
     }
 
 }

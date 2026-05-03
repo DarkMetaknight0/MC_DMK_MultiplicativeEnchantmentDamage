@@ -65,27 +65,27 @@ public class Config {
     public static final ModConfigSpec.BooleanValue BANE_OF_ARTHROPODS_OVERWRITE
             = buildOverwriteConfig(BANE_OF_ARTHROPODS);
     public static final ModConfigSpec.DoubleValue BANE_OF_ARTHROPODS_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(BANE_OF_ARTHROPODS, 0.533);
+            = buildFirstLevelConfig(BANE_OF_ARTHROPODS, 0.416);
     public static final ModConfigSpec.DoubleValue BANE_OF_ARTHROPODS_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(BANE_OF_ARTHROPODS, 0.533);
+            = buildAdditionalLevelConfig(BANE_OF_ARTHROPODS, 0.416);
 
     public static final ModConfigSpec.BooleanValue SMITE_ENABLED
             = buildEnabledConfig(SMITE);
     public static final ModConfigSpec.BooleanValue SMITE_OVERWRITE
             = buildOverwriteConfig(SMITE);
     public static final ModConfigSpec.DoubleValue SMITE_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(SMITE, 0.533);
+            = buildFirstLevelConfig(SMITE, 0.416);
     public static final ModConfigSpec.DoubleValue SMITE_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(SMITE, 0.533);
+            = buildAdditionalLevelConfig(SMITE, 0.416);
 
     public static final ModConfigSpec.BooleanValue IMPALING_ENABLED
             = buildEnabledConfig(IMPALING);
     public static final ModConfigSpec.BooleanValue IMPALING_OVERWRITE
             = buildOverwriteConfig(IMPALING);
     public static final ModConfigSpec.DoubleValue IMPALING_MULTIPLY_FIRST_LEVEL
-            = buildFirstLevelConfig(IMPALING, 0.533);
+            = buildFirstLevelConfig(IMPALING, 0.416);
     public static final ModConfigSpec.DoubleValue IMPALING_MULTIPLY_ADDITIONAL_LEVELS
-            = buildAdditionalLevelConfig(IMPALING, 0.533);
+            = buildAdditionalLevelConfig(IMPALING, 0.416);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 }

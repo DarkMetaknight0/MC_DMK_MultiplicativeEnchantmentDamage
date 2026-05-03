@@ -12,7 +12,8 @@ Knives):
 
 1. Sharpness: From +1 damage at level 1, 0.5 per additional level -> +16.8% level 1, + 8.3% per additional. (x1.5 at
    level 5)
-2. Bane of Arthropods, Smite: +53% level 1, +53% per additional level. (x2.66 base damage at level 5 vs specific mobs)
+2. Bane of Arthropods, Smite: +41.6% level 1, +41.6% per additional level. (x2.66 base damage at level 5 vs specific
+   mobs)
 
 Fully configurable, so you can fine tune the balance:
 

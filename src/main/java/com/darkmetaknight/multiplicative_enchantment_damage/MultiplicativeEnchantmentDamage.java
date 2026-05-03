@@ -1,7 +1,7 @@
 package com.darkmetaknight.multiplicative_enchantment_damage;
 
 import com.darkmetaknight.multiplicative_enchantment_damage.common.Config;
-import com.darkmetaknight.multiplicative_enchantment_damage.enchantments.MultiplicativeEnchantmentUtils;
+import com.darkmetaknight.multiplicative_enchantment_damage.utils.MultiplicativeEnchantmentUtils;
 import com.mojang.logging.LogUtils;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.item.enchantment.Enchantments;

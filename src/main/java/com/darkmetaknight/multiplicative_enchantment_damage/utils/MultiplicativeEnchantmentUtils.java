@@ -1,4 +1,4 @@
-package com.darkmetaknight.multiplicative_enchantment_damage.enchantments;
+package com.darkmetaknight.multiplicative_enchantment_damage.utils;
 
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;

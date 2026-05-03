@@ -1,7 +1,7 @@
 Mod Info:
 =======
-Changes Sharpness, Smite, and Bane of Arthropods damage calculations to be percentage based. This mod aims to lessen the
-gap between enchanted heavy vs light weapons.
+Changes Sharpness, Smite, Bane of Arthropods, and Impaling damage calculations to be percentage based. This mod aims to
+lessen the gap between enchanted heavy vs light weapons.
 
 Mods often add "fast and weak" vs "slow and powerful" and even 2-handed weapons. When the additional damage from
 enchantments is all linear, the balance falls apart and fast weapons almost always win out in DPS. Because of the flat

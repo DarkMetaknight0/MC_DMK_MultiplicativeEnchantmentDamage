@@ -24,6 +24,17 @@ Fully configurable, so you can fine tune the balance:
 
 Keep in mind this stacks on top of crits (e.g. 1.5x from crit times 2.65x)
 
+Note: For modded enchantments from my experience (Illager's Bane and Sculk's Smite, will vary per mod), they don't have
+hardcoded damage scaling logic and will work through a Data Pack.
+Replace their damage minecraft:add effect(s) with the following:
+"type": "minecraft:multiply",
+"factor": {
+"type": "minecraft:linear",
+"base": 1.416,
+"per_level_above_first": 0.416
+}
+I recommend unzipping the mod(s) jar to find the data folder path.
+
 Installation information (Template)
 =======
 
